@@ -1,0 +1,36 @@
+body {
+    background-color: lightblue;
+    color: maroon;
+    font-style: Arial;
+    margin: 0px;
+}
+
+main {
+    background-color: lightblue;
+    color: black;
+    font-style: Arial;
+    margin: 0px;
+    font-size: 18pt;
+}
+
+footer {
+    background-color: black;
+    color: maroon;
+    font-style: italic;
+    margin: 0px;
+    padding: 25px;
+    font-size: 24pt;
+}
+
+header {
+    background-color: black;
+    color: maroon;
+    font-style: italic;
+    margin: 0px;
+    padding: 25px;
+    font-size: 24pt;
+}
+
+a {
+text-decoration: none
+}
