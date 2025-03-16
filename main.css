@@ -32,5 +32,23 @@ header {
 }
 
 a {
-text-decoration: none
+    color: black;
+    text-decoration: none;
 }
+a:link {
+    color: black;
+    text-decoration: none;
+}
+a:visited {
+    color: white;
+    text-decoration: underline;
+    text-decoration-style: double;
+}
+a:hover {
+    color: maroon;
+    text-decoration: underline;
+    }
+a:active {
+    color: grey;
+    opacity: 0.3;
+    }
