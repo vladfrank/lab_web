@@ -32,11 +32,12 @@ header {
 }
 
 a {
-    color: black;
+    color: green;
     text-decoration: none;
+    transition: 1s 2s;
 }
 a:link {
-    color: black;
+    color: green;
     text-decoration: none;
 }
 a:visited {
@@ -47,6 +48,7 @@ a:visited {
 a:hover {
     color: maroon;
     text-decoration: underline;
+    transition: 0.3s;
     }
 a:active {
     color: grey;
