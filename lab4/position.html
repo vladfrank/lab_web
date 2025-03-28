@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 4</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        div {
+            width: 300px;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            background-color: white;
+            border: 1px dotted darkred;
+            margin: 15px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .position-relative {
+            position: relative;
+            left: 120px;
+            top: -130px;
+            z-index: 0;
+        }
+        div.position-relative:hover {
+            z-index: 2;
+            cursor: pointer;
+        }
+        .position-absolute {
+            position: absolute;
+            left: 300px;
+            transition: 2s 0.5s;
+        }
+        div.position-absolute:hover {
+            width: 320px;
+            height: 80px;
+            background-color: palevioletred;
+            box-shadow: 5px 5px 3px black;
+            transition: 2s 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 4
+    </header>
+
+    <main>
+        <div>static</div>
+        <div>static</div>
+        <div class="position-relative">relative</div>
+        <div>static</div>
+        <div>static</div>
+        <div class="position-absolute">static</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+    </main>
+
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
