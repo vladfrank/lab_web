@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 4</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        main {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+ 
+        .cloud {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+ 
+        .t {
+            position: absolute; /* Что бы мы могли случайно позиционировать теги */
+            color: white;
+            margin: 0;
+            padding: 5px 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold; /* Убираем фон div'ов */
+            animation: word 5s ease-in-out infinite;
+        }
+ 
+        /* теги со случайными координатами */
+        .tag1 { font-size: 100px; top: 10%; left: 5%; transform: rotate(-7deg); color: #2aa653; animation: word1 5s ease-in-out infinite; }
+        .tag2 { font-size: 134px; top: 20%; left: 70%; transform: rotate(-12deg); color: #eafa56; animation: word2 5s ease-in-out infinite;  }
+        .tag3 { font-size: 54px; top: 70%; left: 30%; transform: rotate(18deg); color: #1f00d1; animation: word3 5s ease-in-out infinite;  }
+        .tag4 { font-size: 88px; top: 550%; left: 40%; transform: rotate(8deg); color: #d766fa; animation: word4 5s ease-in-out infinite;  }
+        .tag5 { font-size: 72px; top: 20%; left: 70%; transform: rotate(0deg); color: #910000; animation: word5 5s ease-in-out infinite;  }
+        .tag6 { font-size: 56px; top: 60%; left: 50%; transform: rotate(14deg); color: #0d7409; animation: word6 5s ease-in-out infinite;  }
+        .tag7 { font-size: 76px; top: 40%; left: 80%; transform: rotate(9deg); color: #ff00ea; animation: word7 5s ease-in-out infinite;  }
+        .tag8 { font-size: 114px; top: 40%; left: 15%; transform: rotate(8deg); color: #d9ff00; animation: word8 5s ease-in-out infinite;  }
+        .tag9 { font-size: 55px; top: 15%; left: 55%; transform: rotate(22deg); color: #3000a0; animation: word9 5s ease-in-out infinite;  }
+        .tag10 { font-size:90px; top: 55%; left: 65%; transform: rotate(-20deg); color: #92cfac; animation: word10 5s ease-in-out infinite;  }
+        .tag11 { font-size: 134px; top: 60%; left: 10%; transform: rotate(-21deg); color: #634bce; animation: word11 5s ease-in-out infinite;  }
+        .tag12 { font-size: 109px; top: 8%; left: 35%; transform: rotate(13deg); color: #24a5a9; animation: word12 5s ease-in-out infinite;  }
+        .tag13 { font-size: 81px; top: 45%; left: 45%; transform: rotate(-12deg); color: #ff3333; animation: word13 5s ease-in-out infinite;  }
+        .tag14 { font-size: 67px; top: 5%; left: 65%; transform: rotate(3deg); color: #ff3333; animation: word14 5s ease-in-out infinite;  }
+        .tag15 { font-size: 134px; top: 30%; left: 25%; transform: rotate(12deg); color: #63ff33; animation: word15 5s ease-in-out infinite;  }
+ 
+        /* Наведение мышки */
+        .t:hover {
+            transform: scale(1.5); /* Увеличение размера */
+            text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+            z-index: 1; /* Появление над другими тегами */
+            cursor: crosshair;
+            animation-play-state: paused;
+        }
+
+
+        @keyframes word1 {0% { transform: translate(0, 0); } 50% { transform: translate(30px, -55px) rotate(-12deg); } 100% { transform: translate(0, 0); }}
+        @keyframes word2 {0% { transform: translate(0, 0); } 50% { transform: translate(-30px, 15px) rotate(30deg); } 100% { transform: translate(0, 0); }}
+        @keyframes word3 {0% { transform: translate(0, 0); } 50% { transform: translate(20px, -15px); } 100% { transform: translate(0, 0); }}
+        @keyframes word4 {0% { transform: translate(0, 0); } 50% { transform: translate(50px, -75px); } 100% { transform: translate(0, 0); }}
+        @keyframes word5 {0% { transform: translate(0, 0); } 50% { transform: translate(20px, 35px); } 100% { transform: translate(0, 0); }}
+        @keyframes word6 {0% { transform: translate(0, 0); } 50% { transform: translate(50px, -35px) rotate(-25deg);} 100% { transform: translate(0, 0); }}
+        @keyframes word7 {0% { transform: translate(0, 0); } 50% { transform: translate(50px, 45px); } 100% { transform: translate(0, 0); }}
+        @keyframes word8 {0% { transform: translate(0, 0); } 50% { transform: translate(40px, -35px); } 100% { transform: translate(0, 0); }}
+        @keyframes word9 {0% { transform: translate(0, 0); } 50% { transform: translate(25px, 75px) rotate(14deg);} 100% { transform: translate(0, 0); }}
+        @keyframes word10 {0% { transform: translate(0, 0); } 50% { transform: translate(-20px, -45px); } 100% { transform: translate(0, 0); }}
+        @keyframes word11 {0% { transform: translate(0, 0); } 50% { transform: translate(30px, -75px) rotate(-17deg);} 100% { transform: translate(0, 0); }}
+        @keyframes word12 {0% { transform: translate(0, 0); } 50% { transform: translate(60px, -85px); } 100% { transform: translate(0, 0); }}
+        @keyframes word13 {0% { transform: translate(0, 0); } 50% { transform: translate(25px, 35px); } 100% { transform: translate(0, 0); }}
+        @keyframes word14 {0% { transform: translate(0, 0); } 50% { transform: translate(40px, 75px) rotate(50deg);} 100% { transform: translate(0, 0); }}
+        @keyframes word15 {0% { transform: translate(0, 0); } 50% { transform: translate(20px, 35px) rotate(-42deg);} 100% { transform: translate(0, 0); }}
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 4
+    </header>
+
+    <main>
+        <div class="cloud">
+            <div class="t tag1">Москва</div>
+            <div class="t tag2">Питер</div>
+            <div class="t tag3">Новосибирск</div>
+            <div class="t tag4">Уфа</div>
+            <div class="t tag5">Екатеринбург</div>
+            <div class="t tag6">Владивосток</div>
+            <div class="t tag7">Ростов</div>
+            <div class="t tag8">Псков</div>
+            <div class="t tag9">Самара</div>
+            <div class="t tag10">Саратов</div>
+            <div class="t tag11">Волгоград</div>
+            <div class="t tag12">Омск</div>
+            <div class="t tag13">Кемерово</div>
+            <div class="t tag14">Красноярск</div>
+            <div class="t tag15">Томск</div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
