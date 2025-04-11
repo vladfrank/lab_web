@@ -15,6 +15,14 @@
             let result = a + b;
             alert('Сумма ' + a + ' и ' + b + ' равна ' +  result); 
         }
+        function showAuthor() {
+            let author = 'Автор страницы: \nФранк Владислав';
+            alert(author);
+        }
+        function showHI() {
+            let hi = 'Приветствую вас на моей странице! \nЛирили Ларила Господа!';
+            alert(hi);
+        }
     </script>
     <style>
         .masage {
@@ -29,19 +37,25 @@
             background: linear-gradient(to left, orange, white);
             cursor: pointer;
         }
+        header {
+            cursor: pointer;
+        }
+        footer {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <header>
+    <header onclick="showAuthor()">
         НГТУ, ФБ, Лабораторная работа 5
     </header>
 
     <main>
         <div class="masage" onclick="showSum()">Сколько будет 5154+7891?</div>
-        <div class="masage">Узнать кто автор страницы</div>
+        <div class="masage" onclick="showAuthor()">Узнать кто автор страницы</div>
     </main>
 
-    <footer>
+    <footer ondblclick="showHI()">
         &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
     </footer>
 </body>
