@@ -141,6 +141,16 @@
             let hi = 'Приветствую вас на моей странице! \nЛирили Ларила Господа!';
             alert(hi);
         }
+
+        function changeOutput(buttonNum, backColor, textColor, bordRad, bordWind, bordStyle) {
+            let output = document.getElementById('output');
+            output.innerHTML = 'Нажата кнопка '  + buttonNum;
+            output.style.backgroundColor = backColor;
+            output.style.color = textColor
+            output.style.borderRadius = bordRad
+            output.style.borderWidth = bordWind
+            output.style.borderStyle = bordStyle
+        }
     </script>
     <style>
         .masage {
@@ -164,6 +174,15 @@
         i {
             font-size: 16px;
         }
+
+        #output {
+            border: 1px solid;
+            width: 300px;
+            height: 40px;
+            margin: 20px;
+            padding: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -180,6 +199,15 @@
         <div class="masage" onclick="showDiv()">Найти отношение чисел</div>
         <div class="masage" onclick="showPower()">Возвести число в степень <i>(второе число = степень)</i></div>
         <div class="masage" onclick="showAuthor()">Узнать кто автор страницы</div>
+
+        <div>
+            <input type="button" value="Кнопка 1" onclick="changeOutput(1, 'red', 'yellow', '10px', 'thin', 'dotted')">
+            <input type="button" value="Кнопка 2" onclick="changeOutput(2, 'black', 'lime', '40%', 'medium', 'double')">
+            <input type="button" value="Кнопка 3" onclick="changeOutput(3, 'blue', 'white', '20px', 'thick', 'dashed')">
+            <input type="button" value="Кнопка 4" onclick="changeOutput(4, 'grey', 'orangeq', '50px', 'medium', 'ridge')">
+        </div>
+
+        <div id="output"></div>
     </main>
 
     <footer ondblclick="showHI()">
