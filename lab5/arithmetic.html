@@ -79,6 +79,60 @@
             let result = a/b;
             alert(a + '/' + b + ' = ' +  result); 
         }
+
+        function showPower() {
+            // Получаем элементы input
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            
+            // Получаем значения и преобразуем в числа
+            let a = parseFloat(inputA.value);
+            let b = parseFloat(inputB.value);
+
+            // Проверка на NaN (нечисловые данные)
+            if (isNaN(a)) {
+                alert("Введите числовое значение в поле основания");
+                inputA.focus();
+                inputA.select();
+                inputA.style.color = "red";
+                inputA.style.borderColor = "red";
+                return;
+            }
+            
+            if (isNaN(b)) {
+                alert("Введите числовое значение в поле степени");
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = "red";
+                inputB.style.borderColor = "red";
+                return;
+            }
+            
+            // Проверка, если оба поля равны нулю
+            if (a === 0 && b === 0) {
+                alert("Ошибка: оба значения не могут быть нулевыми");
+                inputA.focus();
+                inputA.select();
+                inputA.style.color = "red";
+                inputA.style.borderColor = "red";
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = "red";
+                inputB.style.borderColor = "red";
+                return;
+            }
+            
+            inputA.style.color = "";
+            inputA.style.borderColor = "";
+
+            inputB.style.color = "";
+            inputB.style.borderColor = "";
+
+            // Вычисление результата
+            let result = Math.pow(a, b);
+            alert(a + ' в степени ' + b + ' = ' +  result); 
+        }
+
         function showAuthor() {
             let author = 'Автор страницы: \nФранк Владислав';
             alert(author);
@@ -90,8 +144,8 @@
     </script>
     <style>
         .masage {
-            width: 300px;
-            height: 40px;
+            width: 500px;
+            height: 50px;
             display: inline-block;
             border: 2px solid;
             margin: 5px;
@@ -107,6 +161,9 @@
         footer {
             cursor: pointer;
         }
+        i {
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -121,6 +178,7 @@
         <div class="masage" onclick="showMinus()">Найти разность чисел</div>
         <div class="masage" onclick="showUmnogenie()">Найти произведение чисел</div>
         <div class="masage" onclick="showDiv()">Найти отношение чисел</div>
+        <div class="masage" onclick="showPower()">Возвести число в степень <i>(второе число = степень)</i></div>
         <div class="masage" onclick="showAuthor()">Узнать кто автор страницы</div>
     </main>
 
