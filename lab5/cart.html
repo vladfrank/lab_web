@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 5</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function calcSum() {
+            const prices = {apples: 100, banan: 150, oil: 250, fanta: 110, icecream: 70};
+            
+            // Получаем все элементы input
+            const inputs = {
+                apples: document.getElementById('apples'),
+                banan: document.getElementById('banan'),
+                oil: document.getElementById('oil'),
+                fanta: document.getElementById('fanta'),
+                icecream: document.getElementById('icecream')
+            };
+            
+            // Сбрасываем стили ошибок перед проверкой
+            for (const key in inputs) {
+                inputs[key].style.border = '';
+            }
+            
+            let hasError = false;
+            
+            // Проверяем каждое значение на отрицательное число
+            for (const key in inputs) {
+                const value = parseInt(inputs[key].value) || 0;
+                if (value < 0) {
+                    inputs[key].style.border = '4px solid red';
+                    hasError = true;
+                }
+            }
+            
+            // Если есть ошибка - выводим сообщение и прерываем выполнение
+            if (hasError) {
+                document.getElementById('result').innerText = 'Проверьте данные';
+                return;
+            }
+            
+            const apples = parseInt(inputs.apples.value) || 0;
+            const banan = parseInt(inputs.banan.value) || 0;
+            const oil = parseInt(inputs.oil.value) || 0;
+            const fanta = parseInt(inputs.fanta.value) || 0;
+            const icecream = parseInt(inputs.icecream.value) || 0;
+
+            const result = apples * prices.apples + banan * prices.banan + oil * prices.oil +
+                fanta * prices.fanta + icecream * prices.icecream;
+            
+            document.getElementById('result').innerText = 'Цена корзины: ' + result + ' рублей';
+        }
+    
+        function boardClear() {
+            document.getElementById('apples').value = '';
+            document.getElementById('banan').value = '';
+            document.getElementById('oil').value = '';
+            document.getElementById('fanta').value = '';
+            document.getElementById('icecream').value = '';
+            document.getElementById('result').innerText = '';
+        }
+    </script>
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mainbord {
+            background-color: #8fa5ee;
+            padding: 30px;
+            border: 5px solid #000000;
+            border-radius: 1px;
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 0;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 10px;
+        }
+
+        input[type="number"] {
+            width: 95%;
+            padding: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 150px;
+            margin-right: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            text-align: left;
+        }
+        #calc {
+            background-color: green;
+            color: white;
+        }
+
+        #calc:hover {
+            background-color: rgb(0, 85, 0);
+            color: white;
+        }
+        #calc:active {
+            background-color: rgb(55, 92, 55);
+            color: white;
+        }
+    </style>
+    </head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5.
+    </header>
+
+    <main>
+        <div class="mainbord">
+            <h2>Корзина товаров</h2>
+        
+            <label>Яблоки (100р/шт):</label>
+            <input type="number" id="apples" min="0" placeholder="Введите количество яблок">
+        
+            <label>Бананы (150р/шт):</label>
+            <input type="number" id="banan" min="0" placeholder="Введите количество бананов">
+        
+            <label>Масло (250р/шт):</label>
+            <input type="number" id="oil" min="0" placeholder="Введите количество масла">
+        
+            <label>Фанта (110р/шт):</label>
+            <input type="number" id="fanta" min="0" placeholder="Введите количество фанты">
+        
+            <label>Мороженое (70р/шт):</label>
+            <input type="number" id="icecream" min="0" placeholder="Введите количество мороженного">
+        
+            <button id="calc" onclick="calcSum()">Рассчитать</button>
+            <button onclick="boardClear()">Очистить</button>
+        
+            <div id="result"></div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
