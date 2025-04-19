@@ -26,6 +26,18 @@
             document.getElementById('contrastOutput').innerText = value;
             document.getElementById('contrastImage').style.filter = 'contrast(' + value + ')';
         }
+
+        function grayscaleChange() {
+            let value = document.getElementById('grayscaleValue').value + '%';
+            document.getElementById('grayscaleOutput').innerText = value;
+            document.getElementById('grayscaleImage').style.filter = 'grayscale(' + value + ')';
+        }
+        
+        function huerotateChange() {
+            let value = document.getElementById('huerotateValue').value + 'deg';
+            document.getElementById('huerotateOutput').innerText = value;
+            document.getElementById('huerotateImage').style.filter = 'hue-rotate(' + value + ')';
+        }
     </script>
 </head>
 <body>
@@ -54,6 +66,20 @@
             <span id="contrastOutput"></span>
         </div>
         <div><img src="ephel.jpg" id='contrastImage'></div>
+
+        <div>
+            Фильтр grayscale:
+            <input type="range" min="0" max="100" value="0" onchange="grayscaleChange()" id="grayscaleValue">
+            <span id="grayscaleOutput"></span>
+        </div>
+        <div><img src="ephel.jpg" id='grayscaleImage'></div>
+
+        <div>
+            Фильтр hue-rotate:
+            <input type="range" min="0" max="360" value="0" onchange="huerotateChange()" id="huerotateValue">
+            <span id="huerotateOutput"></span>
+        </div>
+        <div><img src="ephel.jpg" id='huerotateImage'></div>
     </main>
 
     <footer>
