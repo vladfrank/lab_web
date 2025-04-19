@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 5</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        main {
+            position: relative;
+            height: 100vh;
+        }
+
+        .circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            transition: all 1s ease;
+            cursor: pointer;
+            border: 2px solid;
+        }
+
+        .hidde {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:active {
+            background-color: lightgray;
+        }
+    </style>
+    <script>
+        function CirclrHide(elem) {
+            elem.classList.add('hidde');
+        }
+     
+         function CirclesClear() {
+            const circles = document.querySelectorAll('.circle');
+            circles.forEach(c => c.classList.remove('hidde'));
+         }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+
+        <button onclick="CirclesClear()">Вернуть круги</button>
+        
+        <div class="circle" style="top: 70%; left: 25%; background-color: lime;" onclick="CirclrHide(this)">1</div>
+        <div class="circle" style="top: 40%; left: 40%; background-color: coral;" onclick="CirclrHide(this)">2</div>
+        <div class="circle" style="top: 10%; left: 65%; background-color: blueviolet;" onclick="CirclrHide(this)">3</div>
+        <div class="circle" style="top: 65%; left: 65%; background-color: yellow;" onclick="CirclrHide(this)">4</div>
+        <div class="circle" style="top: 30%; left: 90%; background-color: maroon;" onclick="CirclrHide(this)">5</div>
+        <div class="circle" style="top: 20%; left: 40%; background-color: blue;" onclick="CirclrHide(this)">6</div>
+        <div class="circle" style="top: 10%; left: 75%; background-color: fuchsia;" onclick="CirclrHide(this)">7</div>
+        <div class="circle" style="top: 55%; left: 30%; background-color: purple;" onclick="CirclrHide(this)">8</div>
+        <div class="circle" style="top: 35%; left: 10%; background-color: orangered;" onclick="CirclrHide(this)">9</div>
+        <div class="circle" style="top: 15%; left: 25%; background-color: lightblue;" onclick="CirclrHide(this)">10</div>
+    </main>
+
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
