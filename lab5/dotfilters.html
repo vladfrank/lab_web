@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 5</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        main {
+            text-align: center;
+            margin: 10px;
+        }
+        .info {
+            background-color: #75bdb1;
+            border: 5px solid rgb(0, 0, 83);
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            text-align: center;
+            width: 600px;
+            font-size: 25px;
+        }
+        img {
+            width: 600px;
+            transition: filter 0.4s;
+            cursor: crosshair;
+            margin-top: 15px;
+        }
+        #effect {
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        function filterShow(event) {
+            let img = event.target;
+            let rect = img.getBoundingClientRect();
+
+            let x = event.clientX - rect.left;
+            let width = rect.width;
+            let percent = (x / width) * 100;
+ 
+            let filter = '';
+            let effectTitle = '';
+            let filterValue = '';
+ 
+            if (event.ctrlKey) {
+                filter = 'grayscale(' + percent + '%)';
+                effectTitle = 'grayscale';
+                filterValue = Math.round(percent) + '%';
+            } else if (event.altKey) {
+                filter = 'invert(' + percent + '%)';
+                effectTitle = 'invert';
+                filterValue = Math.round(percent) + '%';
+            } else if (event.shiftKey) {
+                let val = percent * 5;
+                filter = 'brightness(' + val + '%)';
+                effectTitle = 'brightness';
+                filterValue = Math.round(val) + '%';
+            } else {
+                filter = 'sepia(' + percent + '%)';
+                effectTitle = 'sepia';
+                filterValue = Math.round(percent) + '%';
+            }
+ 
+            img.style.filter = filter;
+            document.getElementById('effectTitle').textContent = effectTitle;
+            document.getElementById('effectOutput').textContent = filterValue;
+        }
+ 
+        function filterOff(event) {
+            event.target.style.filter = 'none';
+            document.getElementById('effectTitle').textContent = 'нет';
+            document.getElementById('effectOutput').textContent = '0';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+ 
+    <main>
+        <div class="info">
+            <b>Инструкция:</b><br>
+            При наведении курсора на изображение применяется эффект <b>старой фотографии</b>, <i>чем правее ваш курсор</i>, тем сильнее работает фильтр.<br>
+            При наведении курсора с нажатой клавишей <b>Ctrl</b> изменится оттенок серого, <b>Alt</b> произойдет инверсия цвета, <b>Shift</b> изменится яркость.
+        </div>
+
+        <br>
+
+        <img src="ephel.JPG" onmousemove="filterShow(event)" onmouseout="filterOff(event)">
+        
+        <div id="effect">
+            Название фильтра: <span id="effectTitle">нет</span><br>
+            Интенсивность применения: <span id="effectOutput">нет</span>
+        </div>
+    </main>
+ 
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
