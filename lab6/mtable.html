@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 6</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function showMutipleTable() {
+            let tbl = document.getElementById('mtable');
+            tbl.innerHTML = '<h1>Таблица умножения</h1>';
+            for(i = 1; i <= 10; i++) {
+                let s = `<div>${i} * 7 = ${i*7}</div>`;
+                tbl.innerHTML += s;
+            }
+        }
+    </script>
+    <style>
+        #mtable {
+            width: 500px;
+            padding: 10px;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            border: 2px solid;
+            border-radius: 10px;
+            background-color: blueviolet;
+            box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.7);
+            font-weight: 700;
+            margin: auto;
+        }
+    </style>
+</head>
+<body onload="showMutipleTable()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+ 
+    <main>
+        <div id="mtable"></div>
+    </main>
+ 
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
