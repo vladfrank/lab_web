@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 6</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        #diag {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            border: 2px solid;
+            width: 600px;
+            height: 692px;
+            background-color: white;
+        }
+        .bar {
+            display: grid;
+            border: 2px solid;
+            width: 200px;
+            height: 63px;
+            margin-left: 2px;
+            margin-top: 2px;
+            background-color: royalblue;
+        }
+    </style>
+    <script>
+        function showDiagram() {
+            let data = [144, 22, 100, 305, 295, 218, 175, 90, 150, 210];
+            let colors = ['red', 'purple', 'blue', 'lightblue', 'maroon', 'yellow', 'pink', 'grey', 'orange', 'darkgreen'];
+            let bars = document.getElementsByClassName('bar');
+            const diagHeight = document.getElementById('diag').clientHeight;
+            const maxData = Math.max(...data);
+            const k = diagHeight / maxData * 0.9;
+            for(let i = 0; i < data.length; i++) {
+                bars[i].style.height = k*data[i] + 'px';
+                bars[i].style.backgroundColor = colors[i];
+                bars[i].textContent = data[i];
+                bars[i].style.display = 'flex';
+                bars[i].style.justifyContent = 'center';
+                bars[i].style.color = 'black';
+            } 
+        }
+    </script>
+</head>
+<body onload="showDiagram()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+ 
+    <main>
+        <div id="diag">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </main>
+ 
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
