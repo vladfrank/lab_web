@@ -69,6 +69,19 @@
             document.getElementById('start-btn').disabled = false;
             document.getElementById('stop-btn').disabled = true;
         }
+
+        function startUpd() {
+            showDates();
+            dateTimer = setInterval(showDates, 1000);
+            document.getElementById('date-btn').disabled = true;
+            document.getElementById('stop-date-btn').disabled = false;
+        }
+ 
+        function stopUpd() {
+            clearInterval(dateTimer);
+            document.getElementById('date-btn').disabled = false;
+            document.getElementById('stop-date-btn').disabled = true;
+        }
     </script>
 </head>
 <body onload="showDates()">
@@ -79,8 +92,12 @@
     <main>
         <div id="dates-container"></div>
         <div>
-            <button onclick="startChangeColors()" id="start-btn"> Старт</button>
-            <button onclick="stopChangeColors()" disabled id="stop-btn"> Стоп</button>
+            <button onclick="startChangeColors()" id="start-btn">Старт</button>
+            <button onclick="stopChangeColors()" disabled id="stop-btn">Стоп</button>
+        </div>
+        <div>
+            <button onclick="startUpd()" id="date-btn">Обновлять время</button>
+            <button onclick="stopUpd()" disabled id="stop-date-btn">Остановить обновление времени</button>
         </div>
     </main>
 
