@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 6</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        #dates-container {
+            margin: 20px auto;
+            width: 800px;
+            font-family: Arial, sans-serif;
+        }
+        #onedate {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f5f5f5;
+        }
+        span {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+    </style>
+    <script>
+        function showDates() {
+            const today = new Date();
+            const locales = [
+                {code: 'ru-RU', name: 'Россия'},
+                {code: 'el-GR', name: 'Греция'},
+                {code: 'de-DE', name: 'Германия'},
+                {code: 'id-ID', name: 'Индонезия'},
+                {code: 'kk-KZ', name: 'Казахстан'},
+                {code: 'nl-NL', name: 'Нидерланды'}
+            ];
+            
+            let output = '';
+            for (let i = 0; i < locales.length; i++) {
+                const locale = locales[i];
+                output += '<div id="onedate">';
+                output += '<span>Дата и время для локали ' + locale.name + ' : </span>';
+                output += today.toLocaleString(locale.code);
+                output += '</div>';
+            }
+            
+            document.getElementById('dates-container').innerHTML = output;
+        }
+    </script>
+</head>
+<body onload="showDates()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <div id="dates-container"></div>
+    </main>
+
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
