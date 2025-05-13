@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 6</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        .window {
+            border: 2px solid #ccc;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 1000px;
+            margin: 0 auto 20px auto;
+            overflow-x: auto;
+        }
+
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            height: 320px;
+            position: relative;
+        }
+
+        .chart {
+            display: flex;
+            align-items: flex-end;
+            height: 300px;
+            gap: 7.5px;
+            border-left: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding-left: 5px;
+            position: relative;
+            flex: 1;
+        }
+
+        .bar {
+            width: 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .bar div {
+            width: 100%;
+        }
+
+        .min {
+            background-color: #0050ff;
+        }
+
+        .max {
+            background-color: #f80000;
+        }
+
+        .highlight .min {
+            border: 2px solid;
+        }
+
+        .highlight .max {
+            border: 2px solid;
+            border-bottom: 0;
+        }
+
+        .label {
+            font-size: 15px;
+            text-align: center;
+            margin-top: 2px;
+            position: absolute;
+            bottom: -20px;
+            width: 100%;
+            left: 0;
+        }
+
+        input, button {
+            padding: 6px 10px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        #temperatureInfo {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <h2>Температурная диаграмма за месяц</h2>
+
+        <div class="window">
+            <div class="chart-container">
+                <div class="chart" id="chart"></div>
+            </div>
+        </div>
+
+        <div>
+            <label>Номер дня: </label>
+            <input type="number" id="dayInput" min="1" max="30" placeholder="1 - 30">
+            <button onclick="highlightDay()">Найти</button>
+        </div>
+
+        <p id="temperatureInfo"></p>
+    </main>
+
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+    <script>
+        const days = 30;
+        const minTemps = [];
+        const maxTemps = [];
+        const chart = document.getElementById('chart');
+        const xAxis = document.getElementById('xAxis');
+        const yAxis = document.getElementById('yAxis');
+        const chartMaxHeight = 300;
+
+        // Генерация данных с реалистичным разбросом
+        let maxValue = 0;
+        for (let i = 0; i < days; i++) {
+            const min = Math.floor(Math.random() * 10) + 10;          // 10–19
+            const max = min + Math.floor(Math.random() * 10) + 5;     // +5–14
+            minTemps.push(min);
+            maxTemps.push(max);
+            if (max > maxValue) maxValue = max;
+        }
+
+        // Масштабирование: максимум занимает 90%
+        const maxBarHeight = chartMaxHeight * 0.9;
+        const scale = maxBarHeight / maxValue;
+
+        // Столбики
+        for (let i = 0; i < days; i++) {
+            const min = minTemps[i];
+            const max = maxTemps[i];
+            const minHeight = min * scale;
+            const maxHeight = (max - min) * scale;
+
+            const bar = document.createElement('div');
+            bar.classList.add('bar');
+            bar.innerHTML = `
+            <div class="max" style="height:${maxHeight}px" title="Макс: ${max}°C"></div>
+            <div class="min" style="height:${minHeight}px" title="Мин: ${min}°C"></div>
+            <div class="label">${i + 1}</div>
+            `;
+            chart.appendChild(bar);
+        }
+
+        function highlightDay() {
+            const input = document.getElementById('dayInput').value;
+            const day = parseInt(input);
+            const bars = document.querySelectorAll('.bar');
+
+            bars.forEach(bar => bar.classList.remove('highlight'));
+
+            if (day >= 1 && day <= days) {
+            const bar = bars[day - 1];
+            bar.classList.add('highlight');
+            const min = minTemps[day - 1];
+            const max = maxTemps[day - 1];
+            document.getElementById('temperatureInfo').textContent =
+                `День ${day}: минимальная температура — ${min}°C, максимальная — ${max}°C`;
+            } else {
+            document.getElementById('temperatureInfo').textContent =
+                'Введите номер дня от 1 до 30.';
+            }
+        }
+    </script>
+</body>
+</html>
