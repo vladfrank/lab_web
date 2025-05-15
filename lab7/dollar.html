@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script src="dollar-data.js"></script>
+    <style>
+        h1 {
+            color: black;
+            text-align: center;
+        }
+
+        #btn {
+            display: block;
+            margin: auto;
+            padding: 10px 15px;
+            background-color: #2fa033;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        #btn:hover {
+            background-color: #156619;
+        }
+
+        #dollar-table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-weight: 700;
+        }
+
+        #dollar-table td {
+            border: 1px solid;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #dollar-table tr:nth-child(even) {
+            background-color: white;
+        }
+
+        #dollar-table tr:nth-child(odd) {
+            background-color: darkcyan;
+        }
+
+        #detail {
+            margin: auto;
+            margin-top: 20px;
+            padding: 10px;
+            font-weight: 800;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function showExchange(button) {
+            let table = document.getElementById('dollar-table');
+            for(let i = 0; i < exchange.length; i++) {
+                let tr = document.createElement('tr');
+                let tdValue = document.createElement('td');
+                let tdDate = document.createElement('td');
+                tdValue.innerText = exchange[i];
+                tdDate.innerText = dates[i];
+                tr.appendChild(tdValue);
+                tr.appendChild(tdDate);
+                table.appendChild(tr);
+            }
+
+            let sum=0
+            for(let i = 0; i < exchange.length; i++) {
+                sum += exchange[i]; 
+            }
+            let average = sum / exchange.length;
+            average = average.toFixed(2); 
+
+            let atable = document.getElementById('detail');
+            atable.innerText = `Среднее значение: ${average}`;
+
+            button.remove();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <h1>Курс доллара</h1>
+        <button onclick="showExchange(this)" id="btn">Курс доллара</button>
+        <table border="1" id="dollar-table"></table>
+        <div id="detail"></div>
+    </main>
+
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
