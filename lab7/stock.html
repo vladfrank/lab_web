@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script src="stock-data.js"></script>
+    <style>
+        h1 {
+            color: black;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 32px;
+        }
+
+        #btn {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 24px;
+            background-color: #2fa033;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #btn:hover {
+            background-color: #156619;
+            transform: scale(1.05);
+        }
+
+        #stock-table {
+            width: 85%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-weight: 700;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #stock-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #stock-table tr:nth-child(even) {
+            background-color: white;
+        }
+
+        #stock-table tr:nth-child(odd) {
+            background-color: darkcyan;
+            color: white;
+        }
+
+        #stock-table tr:hover {
+            background-color: coral;
+            color: black;
+            transition: 0.3s;
+        }
+
+        .green {
+            color: lightgreen;
+        }
+
+        .red {
+            color: maroon;
+        }
+
+        .black {
+            color: black;
+        }
+
+        #detail {
+            margin: 30px auto;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function showStock(button) {
+            let table = document.getElementById('stock-table');
+
+            let header = document.createElement('tr');
+            header.innerHTML = '<td>Дата</td><td>Цена акций</td><td>Разница</td>';
+            table.appendChild(header);
+
+            for (let i = 0; i < kurs.length; i++) {
+                let tr = document.createElement('tr');
+
+                let tdDate = document.createElement('td');
+                tdDate.innerText = data[i];
+
+                let tdPrice = document.createElement('td');
+                tdPrice.innerText = kurs[i].toFixed(2);
+
+                let tdDiff = document.createElement('td');
+                if (i === 0) {
+                    tdDiff.innerText = '–';
+                    tdDiff.className = 'black';
+                } else {
+                    let diff = kurs[i] - kurs[i - 1];
+                    tdDiff.innerText = diff.toFixed(2);
+
+                    if (diff > 0) tdDiff.className = 'green';
+                    else if (diff < 0) tdDiff.className = 'red';
+                    else tdDiff.className = 'black';
+                }
+
+                tr.appendChild(tdDate);
+                tr.appendChild(tdPrice);
+                tr.appendChild(tdDiff);
+                table.appendChild(tr);
+            }
+
+            let sum = 0, max = kurs[0], min = kurs[0];
+            for (let i = 0; i < kurs.length; i++) {
+                sum += kurs[i];
+                if (kurs[i] > max) max = kurs[i];
+                if (kurs[i] < min) min = kurs[i];
+            }
+
+            let avg = (sum / kurs.length).toFixed(2);
+
+            let detail = document.getElementById('detail');
+            detail.innerText = `Средняя цена: ${avg}; Максимум: ${max}; Минимум: ${min}`;
+
+            button.remove();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <h1>Курс акций Ашинского металлургического завода</h1>
+        <button onclick="showStock(this)" id="btn">Курс акций</button>
+        <table id="stock-table"></table>
+        <div id="detail"></div>
+    </main>
+
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
