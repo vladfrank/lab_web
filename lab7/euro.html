@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Франк Владислав Валерьевич. Лабораторная 7 — Курс евро</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 24px;
+            background-color: #2fa033;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #btn:hover {
+            background-color: #156619;
+        }
+
+        #output {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+
+    <script>
+        function getEuroExchangeRate() {
+            const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const eur = data.Valute.EUR;
+                    const currentRate = eur.Value;
+                    const previousRate = eur.Previous;
+                    const date = data.Date.slice(0, 10).split('-').reverse().join('.');
+
+                    let diff = (currentRate - previousRate).toFixed(2);
+                    let trend = '';
+
+                    if (diff > 0) {
+                        trend = `Курс вырос на ${diff} ₽`;
+                    } else if (diff < 0) {
+                        trend = `Курс снизился на ${Math.abs(diff)} ₽`;
+                    } else {
+                        trend = 'Курс не изменился';
+                    }
+
+                    document.getElementById('output').innerHTML = `
+                        <p>Дата: <b>${date}</b></p>
+                        <p>Текущий курс евро: <b>${currentRate.toFixed(2)} ₽</b></p>
+                        <p>Курс накануне: <b>${previousRate.toFixed(2)} ₽</b></p>
+                        <p>Разница: ${trend}</p>
+                    `;
+
+                    document.getElementById('btn').remove();
+                })
+                .catch(error => {
+                    document.getElementById('output').innerText = 'Ошибка загрузки данных: ' + error;
+                });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <h1>Курс евро</h1>
+        <button id="btn" onclick="getEuroExchangeRate()">Получить курс евро</button>
+        <div id="output"></div>
+
+        <a href="https://www.cbr-xml-daily.ru/" target="_blank">Курсы ЦБ РФ в XML и JSON, API</a>
+    </main>
+
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
