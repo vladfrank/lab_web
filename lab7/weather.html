@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоды — Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 24px;
+            background-color: #2fa033;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #btn:hover {
+            background-color: #156619;
+        }
+
+        #output {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function getWeather() {
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m&timezone=Asia%2FBangkok';
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const times = data.hourly.time;
+                    const temps = data.hourly.temperature_2m;
+
+                    const today = new Date().toISOString().split("T")[0];
+
+                    function getTemp(hour) {
+                        const timeStr = `${today}T${hour}:00`;
+                        const index = times.indexOf(timeStr);
+                        return index !== -1 ? temps[index] : '—';
+                    }
+
+                    const t8 = getTemp("08");
+                    const t12 = getTemp("12");
+                    const t20 = getTemp("20");
+
+                    document.getElementById("output").innerHTML = `
+                        <p>Прогноз погоды в Новосибирске на <b>${today.split('-').reverse().join('.')}</b></p>
+                        <p>08:00 — <b>${t8}°C</b></p>
+                        <p>12:00 — <b>${t12}°C</b></p>
+                        <p>20:00 — <b>${t20}°C</b></p>
+                    `;
+
+                    document.getElementById("btn").remove();
+                })
+                .catch(error => {
+                    document.getElementById("output").innerText = "Ошибка получения данных: " + error;
+                });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <h1>Прогноз погоды</h1>
+        <button id="btn" onclick="getWeather()">Узнать погоду в Новосибирске</button>
+        <div id="output"></div>
+    </main>
+
+    <footer>
+        &copy; Франк Владислав, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
