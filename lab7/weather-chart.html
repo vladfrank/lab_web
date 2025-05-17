@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Доп. задание — Прогноз погоды</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m,pressure_msl&timezone=Asia%2FBangkok')
+            .then(res => res.json())
+            .then(data => {
+            const t = data.hourly.time;
+            const temp = data.hourly.temperature_2m;
+            const pres = data.hourly.pressure_msl;
+
+            const today = new Date().toISOString().split('T')[0];
+            const labels = [], temps = [], press = [];
+
+            for (let i = 0; i < t.length; i++) {
+                if (t[i].startsWith(today)) {
+                labels.push(t[i].split('T')[1].slice(0, 5));
+                temps.push(temp[i]);
+                press.push(pres[i]);
+                }
+            }
+
+            new Chart(document.getElementById("weatherChart"), {
+                data: {
+                labels,
+                datasets: [
+                    {
+                    type: 'line',
+                    label: 'Температура (°C)',
+                    data: temps,
+                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    yAxisID: 'y1',
+                    tension: 0.3,
+                    pointRadius: 3
+                    },
+                    {
+                    type: 'bar',
+                    label: 'Давление (гПа)',
+                    data: press,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    yAxisID: 'y2'
+                    }
+                ]
+                },
+                options: {
+                responsive: true,
+                scales: {
+                    y1: {
+                    position: 'left',
+                    title: { display: true, text: 'Температура' }
+                    },
+                    y2: {
+                    position: 'right',
+                    title: { display: true, text: 'Давление' },
+                    min: 990,
+                    max: 1030,
+                    grid: { drawOnChartArea: false }
+                    }
+                }
+                }
+            });
+
+            const h = new Date().getHours().toString().padStart(2, '0') + ':00';
+            const i = labels.indexOf(h);
+            const tNow = i >= 0 ? temps[i] : 'н/д';
+            const pNow = i >= 0 ? press[i] : 'н/д';
+
+            document.getElementById('current').innerHTML = `
+                <h3>Показатели на данный момент:</h3>
+                <p>Время: ${h}</p>
+                <p>Температура: ${tNow}°C</p>
+                <p>Давление: ${pNow} гПа</p>
+            `;
+            });
+        });
+    </script>
+
+    <link rel="stylesheet" href="../main.css">
+    <link rel="icon" href="../favicon.ico">
+    <style>
+        h1 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 32px;
+        }
+        
+        h3 {
+            margin: auto;
+            padding: auto;
+        }
+
+        canvas {
+        display: block;
+        max-width: 95%;
+        height: 400px !important;
+        margin: 30px auto;
+        background-color: #ffffff;
+        border: 2px solid darkcyan;
+        border-radius: 12px;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        #current {
+        width: fit-content;
+        margin: 20px auto;
+        padding: 20px 30px;
+        border: 2px solid teal;
+        border-radius: 10px;
+        background-color: #e0ffff;
+        font-size: 18px;
+        line-height: 1.6;
+        font-weight: 600;
+        }
+
+        #current p {
+        margin: 10px 0;
+        }
+
+        #current p::before {
+        display: inline-block;
+        margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>НГТУ, ФБ, Лабораторная работа 7 — Доп. задание</header>
+
+    <main>
+        <h1>Температура и давление на сегодня</h1>
+        <canvas id="weatherChart"></canvas>
+        <div id="current">Загрузка...</div>
+    </main>
+
+    <footer>&copy; Франк Владислав, ФБИ-31, 2 курс, 2025</footer>
+</body>
+</html>
