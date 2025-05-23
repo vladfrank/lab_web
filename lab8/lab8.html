@@ -55,6 +55,25 @@
                     <span class="badge text-bg-primary fs-5">{{ result }}</span>
                 </div>
             </div>
+
+            <h2>Цветы</h2>
+            <table class="table table-light table-striped-columns">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Редактировать</th>
+                    </tr>
+                </thead>
+                <tr v-for="(flower, id) in flowers">
+                    <td>
+                        {{ flower }}
+                    </td>
+                    <td>
+                        <button @click="edit(id, flower)">?</button>
+                    </td>
+                </tr>
+            </table>
+            <hr>
         </div>
     </main>
 
