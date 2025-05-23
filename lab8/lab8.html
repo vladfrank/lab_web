@@ -19,16 +19,21 @@
 
     <main>
         <div id="app">
-            <h1 :title="messageRus">{{ message }}</h1>
+            <h1 :title="messageRus" class="badge text-bg-info" style="font-size: 28px;">{{ message }}</h1>
             <p>Счётчик: {{counter}}</p>
-            <button @click="incCounter" v-if="counter < 10">++</button>
-            <button @click="decCounter" v-if="counter > 0">--</button>
+            <button @click="incCounter" v-if="counter < 10" class="btn btn-primary" style="margin: 10px;">
+                <i class="bi bi-arrow-up-circle-fill"></i>
+            </button>
+            <button @click="decCounter" v-if="counter > 0" class="btn btn-primary" style="margin: 10px;">
+                <i class="bi bi-arrow-down-circle-fill"></i>
+            </button>
             <hr>
 
-            <h2>Пользователь</h2>
+            <h2 class="badge text-bg-secondary" style="font-size: 24px;">Пользователь</h2>
             <div>Имя: {{user.name}}</div>
             <div>Возраст: {{user.age}}</div>
             <div>Телефон: {{user.tel}}</div>
+            <hr>
 
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
@@ -47,7 +52,7 @@
             </div>
             <hr>
 
-            <h2>Калькулятор</h2>
+            <h2 class="badge text-bg-secondary" style="font-size: 24px;">Калькулятор</h2>
             <div class="row g-5">
                 <div class="col-auto">
                     <input type="number" v-model="a" class="form-control">
@@ -65,8 +70,9 @@
                     <span class="badge text-bg-primary fs-5">{{ result }}</span>
                 </div>
             </div>
+            <hr>
 
-            <h2>Цветы</h2>
+            <h2 class="badge text-bg-secondary" style="font-size: 24px;">Цветы</h2>
             <table class="table table-light table-striped-columns">
                 <thead>
                     <tr>
